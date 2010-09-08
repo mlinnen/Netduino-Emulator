@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Emulator>
+  <Types>
+    <GpioPort>Microsoft.SPOT.Emulator.Gpio.GpioPort</GpioPort>
+    <ComPort>Microsoft.SPOT.Emulator.Com.ComPortToMemoryStream</ComPort>
+  </Types>
+  <EmulatorComponents>
+    <!-- GPIO Ports-->
+   
+    <GpioPort id="GPIO_PIN_A0">
+      <Pin>59</Pin>
+      <ModesAllowed>InputOutputPort</ModesAllowed>
+      <ModesExpected>InputOutputPort</ModesExpected>
+    </GpioPort>
+    <GpioPort id="GPIO_PIN_A1">
+      <Pin>60</Pin>
+      <ModesAllowed>InputOutputPort</ModesAllowed>
+      <ModesExpected>InputOutputPort</ModesExpected>
+    </GpioPort>
+    <GpioPort id="GPIO_PIN_A2">
+      <Pin>61</Pin>
+      <ModesAllowed>InputOutputPort</ModesAllowed>
+      <ModesExpected>InputOutputPort</ModesExpected>
+    </GpioPort>
+    <GpioPort id="GPIO_PIN_A3">
+      <Pin>62</Pin>
+      <ModesAllowed>InputOutputPort</ModesAllowed>
+      <ModesExpected>InputOutputPort</ModesExpected>
+    </GpioPort>
+    <GpioPort id="GPIO_PIN_A4">
+      <Pin>10</Pin>
+      <ModesAllowed>InputOutputPort</ModesAllowed>
+      <ModesExpected>InputOutputPort</ModesExpected>
+    </GpioPort>
+    <GpioPort id="GPIO_PIN_A5">
+      <Pin>11</Pin>
+      <ModesAllowed>InputOutputPort</ModesAllowed>
+      <ModesExpected>InputOutputPort</ModesExpected>
+    </GpioPort>
+    <GpioPort id="GPIO_PIN_D0">
+      <Pin>27</Pin>
+      <ModesAllowed>InputOutputPort</ModesAllowed>
+      <ModesExpected>InputOutputPort</ModesExpected>
+    </GpioPort>
+    <GpioPort id="GPIO_PIN_D1">
+      <Pin>28</Pin>
+      <ModesAllowed>InputOutputPort</ModesAllowed>
+      <ModesExpected>InputOutputPort</ModesExpected>
+    </GpioPort>
+    <GpioPort id="GPIO_PIN_D10">
+      <Pin>54</Pin>
+      <ModesAllowed>InputOutputPort</ModesAllowed>
+      <ModesExpected>InputOutputPort</ModesExpected>
+    </GpioPort>
+    <GpioPort id="GPIO_PIN_D11">
+      <Pin>17</Pin>
+      <ModesAllowed>InputOutputPort</ModesAllowed>
+      <ModesExpected>InputOutputPort</ModesExpected>
+    </GpioPort>
+    <GpioPort id="GPIO_PIN_D12">
+      <Pin>16</Pin>
+      <ModesAllowed>InputOutputPort</ModesAllowed>
+      <ModesExpected>InputOutputPort</ModesExpected>
+    </GpioPort>
+    <GpioPort id="GPIO_PIN_D13">
+      <Pin>18</Pin>
+      <ModesAllowed>InputOutputPort</ModesAllowed>
+      <ModesExpected>InputOutputPort</ModesExpected>
+    </GpioPort>
+    <GpioPort id="GPIO_PIN_D2">
+      <Pin>0</Pin>
+      <ModesAllowed>InputOutputPort</ModesAllowed>
+      <ModesExpected>InputOutputPort</ModesExpected>
+    </GpioPort>
+    <GpioPort id="GPIO_PIN_D3">
+      <Pin>1</Pin>
+      <ModesAllowed>InputOutputPort</ModesAllowed>
+      <ModesExpected>InputOutputPort</ModesExpected>
+    </GpioPort>
+    <GpioPort id="GPIO_PIN_D4">
+      <Pin>12</Pin>
+      <ModesAllowed>InputOutputPort</ModesAllowed>
+      <ModesExpected>InputOutputPort</ModesExpected>
+    </GpioPort>
+    <GpioPort id="GPIO_PIN_D5">
+      <Pin>51</Pin>
+      <ModesAllowed>InputOutputPort</ModesAllowed>
+      <ModesExpected>InputOutputPort</ModesExpected>
+    </GpioPort>
+    <GpioPort id="GPIO_PIN_D6">
+      <Pin>52</Pin>
+      <ModesAllowed>InputOutputPort</ModesAllowed>
+      <ModesExpected>InputOutputPort</ModesExpected>
+    </GpioPort>
+    <GpioPort id="GPIO_PIN_D7">
+      <Pin>3</Pin>
+      <ModesAllowed>InputOutputPort</ModesAllowed>
+      <ModesExpected>InputOutputPort</ModesExpected>
+    </GpioPort>
+    <GpioPort id="GPIO_PIN_D8">
+      <Pin>4</Pin>
+      <ModesAllowed>InputOutputPort</ModesAllowed>
+      <ModesExpected>InputOutputPort</ModesExpected>
+    </GpioPort>
+    <GpioPort id="GPIO_PIN_D9">
+      <Pin>53</Pin>
+      <ModesAllowed>InputOutputPort</ModesAllowed>
+      <ModesExpected>InputOutputPort</ModesExpected>
+    </GpioPort>
+    <GpioPort id="ONBOARD_LED">
+      <Pin>55</Pin>
+      <ModesAllowed>OutputPort</ModesAllowed>
+      <ModesExpected>OutputPort</ModesExpected>
+    </GpioPort>
+    <GpioPort id="ONBOARD_SW1">
+      <Pin>29</Pin>
+      <ModesAllowed>InputPort</ModesAllowed>
+      <ModesExpected>InputPort</ModesExpected>
+    </GpioPort>
+  </EmulatorComponents>
+</Emulator>
