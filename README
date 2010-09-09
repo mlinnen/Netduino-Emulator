@@ -1,6 +1,6 @@
 Netduino Emulator Project
 ======================================
-This project exists to make building emulators for the Netduino platform simpler.  A Netduino software developer should be able to build an emulator that is specific to his/her project fast and easy.  The   
+This project exists to make building emulators for the Netduino platform simpler.  A Netduino software developer should be able to build an emulator that is specific to his/her project fast and easy.
 
 Release
 ======================================
@@ -8,11 +8,21 @@ Alpha 0.1 - which means some things work but I have a lot to build out
 
 Getting Started
 ======================================
-You will need to go to the www.netduino.com website, download and install the .Net Framework and the Netduino SDK.
+Perfrom the follow:
+1) Go to the www.netduino.com website, download and install the .Net Micro Framework SDK 4.1 and the Netduino SDK.
+2) Open the NetduinoEmulator.sln solution and compile it.  
+3) Run the Netduino.Shell project and give the emulator a name and press the Register button.  
+   This will write a registry entry that is used by any Netduino .Net Micro Framework project.
+4) Right click on the Netduino.Sample1 project and select properties.  
+5) Select the .Net Micro Framework tab.  
+6) Make sure the Transport is set to Emulator.
+7) Make sure the Device is set to the Emulator you just registered in step 3 above.
+8) Run the Netduino.Sample1 project.
 
-Open the NetduinoEmulator.sln solution and compile it.  Run the Netduino.Shell project and give the emulator a name and press the Register button.  This will write a registry entry that is used by any Netduino .Net Micro Framework project.
+Observe that the Netduino Emulator will open up showing the status of the digital outputs as well as the onboard LED.
+The Sample1.Program will cycle through all the outputs which will turn the rectangles on the emulator green one at a time.
 
-Right click on the Netduino.Sample1 project and select properties.  Select the .Net Micro Framework tab.  Make sure the Transport is set to Emulator.  Make sure the Device is set to the Emulator you just registered.
+Creating my own Emulator
+======================================
 
-Run the Netduino.Sample1 project and the Netduin Emulator will open up showing the status of the digital outputs as well as the onboadr LED.
 
