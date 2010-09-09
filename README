@@ -8,7 +8,7 @@ Alpha 0.1 - which means some things work but I have a lot to build out
 
 Getting Started
 ======================================
-Perfrom the follow:
+Perform the following:
 1) Go to the www.netduino.com website, download and install the .Net Micro Framework SDK 4.1 and the Netduino SDK.
 2) Open the NetduinoEmulator.sln solution and compile it.  
 3) Run the Netduino.Shell project and give the emulator a name and press the Register button.  
@@ -24,5 +24,5 @@ The Sample1.Program will cycle through all the outputs which will turn the recta
 
 Creating my own Emulator
 ======================================
-TODO
+TODO - Need to add the instructions on how someone would create their own emulator.
 
