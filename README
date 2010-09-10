@@ -1,6 +1,15 @@
 Netduino Emulator Project
 ======================================
-This project exists to make building emulators for the Netduino platform simpler.  A Netduino software developer should be able to build an emulator that is specific to his/her project fast and easy.
+This project exists to make building emulators for the Netduino platform simpler.  A Netduino software developer should be able to build an  
+emulator that is specific to his/her project fast and easy.
+
+The emulator supports the following:
+* Digital Inputs
+* Digital Outputs
+
+The emulator currently does not support the following:
+* Analog inputs
+* PWM Outputs
 
 Release
 ======================================
@@ -10,19 +19,135 @@ Getting Started
 ======================================
 Perform the following:
 1) Go to the www.netduino.com website, download and install the .Net Micro Framework SDK 4.1 and the Netduino SDK.
-2) Open the NetduinoEmulator.sln solution and compile it.  
-3) Run the Netduino.Shell project and give the emulator a name and press the Register button.  
-   This will write a registry entry that is used by any Netduino .Net Micro Framework project.
-4) Right click on the Netduino.Sample1 project and select properties.  
-5) Select the .Net Micro Framework tab.  
-6) Make sure the Transport is set to Emulator.
-7) Make sure the Device is set to the Emulator you just registered in step 3 above.
-8) Run the Netduino.Sample1 project.
+2) Open the NetduinoEmulator.sln solution and compile it.
+3) Create a folder called Extensions in the Application\Shell folder
+4) Copy the Application\SimpleEmulator\NetduinoEmulator.dll to the Application\ShellExtensions folder
+5) Run the Netduino.Shell project and give the emulator a name and press the Register button. This will write a registry entry that is used by any  
+Netduino .Net Micro Framework project. You only have to register the emulator once for a given directory.
+6) Reload the solution so that the new registry entry will be read.
+7) Right click on the Netduino.Sample1 project and select properties.  
+8) Select the .Net Micro Framework tab.  
+9) Make sure the Transport is set to Emulator.
+10) Make sure the Device is set to the Emulator you just registered in step 5 above.
+11) Run the Netduino.Sample1 project.
 
 Observe that the Netduino Emulator will open up showing the status of the digital outputs as well as the onboard LED.
 The Sample1.Program will cycle through all the outputs which will turn the rectangles on the emulator green one at a time.
 
 Creating my own Emulator
 ======================================
-TODO - Need to add the instructions on how someone would create their own emulator.
+You can use the Netduino.SimpleEmulator as a model of how to create your own emulator that will be loaded by the shell dynamically.  Or you can  
+follow these steps to create one:
+1) Create a new Class Library C# project Example: Netduino.MyEmulator
+2) Add the following references: WindowsBase, PresentationCore, PresentationFramework, SYstem.Xaml, System.ComponentModel.Composition
+3) Add the following references from the Lib folder: Caliburn.Micro.dll and System.Windows.Interactivity.dll
+4) Add a reference to the Application\Shell\Netduino.Core.dll 
+5) Change the name of the assembly to NetduinoEmulator.  The shell looks for dlls by this name and dynamically loads it.
+6) Add a new public class called MyEmulatorViewModel.cs that inherits from Caliburn.Micro.Screen and also implements IEmulatorViewModel
+7) Make sure the MyEmulatorViewModel has an Export attribute with a typeof IEmulatorViewModel Example:
+
+    [Export(typeof(IEmulatorViewModel))]
+    public class MyEmulatorViewModel : Screen, IEmulatorViewModel
+    {
+
+    }
+
+7) Create a new WPF User Control called MyEmulatorView.xaml
+8) Add a textblock control to the WPF control with a name of DIOZero Example:
+
+    <Grid>
+        <TextBlock Name="DIOZero"></TextBlock>
+    </Grid>
+
+9) Change the MyEmulatorViewModel class to implement the IHandle<OutputGpioEventArgs> interface Example:
+     
+    [Export(typeof(IEmulatorViewModel))]
+    public class MyEmulatorViewModel : Screen, IEmulatorViewModel, IHandle<OutputGpioEventArgs>
+    {
+
+        public void Handle(OutputGpioEventArgs message)
+        {
+            
+        }
+    }
+
+10) Modify the MyEmulatorViewModel class to have a property Boolean called DIOZero and add in some code for the Handle method to set the property  
+Example:
+
+    private bool _dioZero;
+    public bool DIOZero
+    {
+        get { return _dioZero; }
+        set
+        {
+            if (_dioZero != value)
+            {
+                _dioZero = value;
+                NotifyOfPropertyChange(() => DIOZero);
+            }
+        }
+    }
+
+    public void Handle(OutputGpioEventArgs message)
+    {
+        if (message.Pin == Pins.GPIO_PIN_D0)
+        {
+            DIOZero = message.Edge;
+        }
+    }
+
+11) Add a constructor that accepts the IEventAggregator and registers the MyEmulatorViewModel to subscribe for IO messages
+
+    private readonly IEventAggregator _eventAggregator;
+    [ImportingConstructor]
+    public MyEmulatorViewModel(IEventAggregator eventAggregator)
+    {
+        _eventAggregator = eventAggregator;
+	_eventAggregator.Subscribe(this);
+    }
+
+
+12) The entire MyEmulatorModelView should look like the following:
+
+    [Export(typeof(IEmulatorViewModel))]
+    public class MyEmulatorViewModel : Screen, IEmulatorViewModel, IHandle<OutputGpioEventArgs>
+    {
+        private bool _dioZero;
+
+        private readonly IEventAggregator _eventAggregator;
+		[ImportingConstructor]
+        public MyEmulatorViewModel(IEventAggregator eventAggregator)
+		{
+			_eventAggregator = eventAggregator;
+			_eventAggregator.Subscribe(this);
+		}
+
+        public bool DIOZero
+        {
+            get { return _dioZero; }
+            set
+            {
+                if (_dioZero != value)
+                {
+                    _dioZero = value;
+                    NotifyOfPropertyChange(() => DIOZero);
+                }
+            }
+        }
+
+        public void Handle(OutputGpioEventArgs message)
+        {
+            if (message.Pin == Pins.GPIO_PIN_D0)
+            {
+                DIOZero = message.Edge;
+            }
+        }
+    }
+
+13) Compile the solution and copy the NetduinoEmulator.dll to the Application\Shell\Extensions folder overwriting any existing  
+NetduinoEmulator.dll's
+14) Run the Netduino.Sample1 project and you should see your new emulator view come up and the text box toggles between false and true when the  
+Gpio 0 bit changes.
+
+Congratulations you made your first emulator.
 
