@@ -37,6 +37,9 @@
     <Reference Include="Caliburn.Micro">
       <HintPath>..\Lib\Caliburn.Micro.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\Lib\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.Build.Utilities.v4.0" />
     <Reference Include="Microsoft.SPOT.CLR, Version=4.1.2821.0, Culture=neutral, PublicKeyToken=2670f5f21e7f4192, processorArchitecture=x86" />
@@ -71,6 +74,8 @@
     <Compile Include="Service\Emulator2.cs" />
     <Compile Include="Service\EmulatorService.cs" />
     <Compile Include="Service\IEmulatorService.cs" />
+    <Compile Include="Service\Log4NetLogger.cs" />
+    <Compile Include="Service\TextFileLogger.cs" />
     <Compile Include="ViewModels\IEmulatorViewModel.cs" />
     <Compile Include="ViewModels\IShellViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />

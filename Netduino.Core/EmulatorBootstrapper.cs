@@ -12,6 +12,7 @@ using Netduino.Core.Services;
 using System.IO;
 using Microsoft.SPOT.Tasks;
 using System.Xml;
+using Netduino.Core.Service;
 
 namespace Netduino.Core
 {
@@ -22,12 +23,16 @@ namespace Netduino.Core
 	{
 		private CompositionContainer container;
 
+        static EmulatorBootstrapper()
+        {
+            LogManager.GetLog = type => new Log4netLogger(type);
+        }
+
         /// <summary>
         /// Configure the IOC Container and get the emulator started
         /// </summary>
         protected override void Configure()
 		{
-			LogManager.GetLog = type => new DebugLogger(type);
 
             AggregateCatalog catalog = new AggregateCatalog(AssemblySource.Instance.Select(x => new AssemblyCatalog(x)).OfType<ComposablePartCatalog>());
 			container = new CompositionContainer(catalog);

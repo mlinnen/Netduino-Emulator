@@ -43,6 +43,7 @@
     <Reference Include="Caliburn.Micro">
       <HintPath>..\Lib\Caliburn.Micro.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.SPOT.CLR, Version=4.1.2821.0, Culture=neutral, PublicKeyToken=2670f5f21e7f4192, processorArchitecture=x86" />
     <Reference Include="Microsoft.SPOT.Emulator, Version=4.1.2821.0, Culture=neutral, PublicKeyToken=2670f5f21e7f4192, processorArchitecture=x86" />
     <Reference Include="System" />

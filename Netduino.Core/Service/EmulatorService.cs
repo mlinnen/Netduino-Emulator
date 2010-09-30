@@ -33,6 +33,8 @@ namespace Netduino.Core.Services
 		private GpioPort _gpio_d13Port;
 		//private GpioPort _gpio_a0Port;
 		private readonly IEventAggregator _eventAggregator;
+        private readonly ILog _log = LogManager.GetLog(typeof(EmulatorService));
+
 
 		public EmulatorService(IEventAggregator eventAggregator)
 		{
@@ -47,7 +49,7 @@ namespace Netduino.Core.Services
             }
             catch (Exception ex)
             {
-
+                _log.Error(ex);
             }
         }
 
@@ -98,7 +100,18 @@ namespace Netduino.Core.Services
             if (port != null)
             {
                 if (port.ModesAllowed == GpioPortMode.InputOutputPort || port.ModesAllowed == GpioPortMode.OutputPort)
+                {
+                    _log.Info("Id={0} is an output pin so register it for events", id);
                     port.OnGpioActivity += new GpioActivity(Port_OnGpioActivity);
+                }
+                else
+                {
+                    _log.Warn("Id={0} must not be an output pin", id);
+                }
+            }
+            else
+            {
+                _log.Warn("Output was not registered Id={0}", id);
             }
             return port;
         }
@@ -110,6 +123,7 @@ namespace Netduino.Core.Services
 
 		void Port_OnGpioActivity(GpioPort sender, bool edge)
 		{
+            _log.Info("Emulator Service GpioPort Fired {0} {1}",sender.Pin,edge);
             _eventAggregator.Publish<OutputGpioEventArgs>(new OutputGpioEventArgs((int)sender.Pin, edge));
 		}
 
@@ -118,15 +132,69 @@ namespace Netduino.Core.Services
             
             if (message != null)
             {
-                if (message.Pin == Pins.ONBOARD_SW1 && _onBoardSwitch1!=null)
+                _log.Info("Emulator Service: Handle Input {0} {1}",message.Pin,message.Edge);
+                if (message.Pin == Pins.ONBOARD_SW1 && _onBoardSwitch1 != null)
                 {
                     _onBoardSwitch1.Write(message.Edge);
+                }
+                if (message.Pin == Pins.GPIO_PIN_D1 && _gpio_d1Port != null)
+                {
+                    _gpio_d1Port.Write(message.Edge);
+                }
+                if (message.Pin == Pins.GPIO_PIN_D2 && _gpio_d2Port != null)
+                {
+                    _gpio_d2Port.Write(message.Edge);
+                }
+                if (message.Pin == Pins.GPIO_PIN_D3 && _gpio_d3Port != null)
+                {
+                    _gpio_d3Port.Write(message.Edge);
+                }
+                if (message.Pin == Pins.GPIO_PIN_D4 && _gpio_d4Port != null)
+                {
+                    _gpio_d4Port.Write(message.Edge);
+                }
+                if (message.Pin == Pins.GPIO_PIN_D5 && _gpio_d5Port != null)
+                {
+                    _gpio_d5Port.Write(message.Edge);
+                }
+                if (message.Pin == Pins.GPIO_PIN_D6 && _gpio_d6Port != null)
+                {
+                    _gpio_d6Port.Write(message.Edge);
+                }
+                if (message.Pin == Pins.GPIO_PIN_D7 && _gpio_d7Port != null)
+                {
+                    _gpio_d7Port.Write(message.Edge);
+                }
+                if (message.Pin == Pins.GPIO_PIN_D8 && _gpio_d8Port != null)
+                {
+                    _gpio_d8Port.Write(message.Edge);
+                }
+                if (message.Pin == Pins.GPIO_PIN_D9 && _gpio_d9Port != null)
+                {
+                    _gpio_d9Port.Write(message.Edge);
+                }
+                if (message.Pin == Pins.GPIO_PIN_D10 && _gpio_d10Port != null)
+                {
+                    _gpio_d10Port.Write(message.Edge);
+                }
+                if (message.Pin == Pins.GPIO_PIN_D11 && _gpio_d11Port != null)
+                {
+                    _gpio_d11Port.Write(message.Edge);
+                }
+                if (message.Pin == Pins.GPIO_PIN_D12 && _gpio_d12Port != null)
+                {
+                    _gpio_d12Port.Write(message.Edge);
+                }
+                if (message.Pin == Pins.GPIO_PIN_D13 && _gpio_d13Port != null)
+                {
+                    _gpio_d13Port.Write(message.Edge);
                 }
             }
         }
 
         public void Handle(OutputGpioEventArgs message)
         {
+            _log.Info("Emulator Service Handle Output ");
 
         }
     }

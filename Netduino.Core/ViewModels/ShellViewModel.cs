@@ -18,10 +18,12 @@ namespace Netduino.Core.ViewModels
         private string _keyBase = @"HKEY_CURRENT_USER\Software\Microsoft\.NETMicroFramework\v4.1\Emulators\{45D406A2-51DD-4662-ABDD-499BD9589AF1}";
         private IWindowManager _windowManager;
         private IEmulatorViewModel _emulatorViewModel;
+        private readonly ILog _log = LogManager.GetLog(typeof(ShellViewModel));
 
         [ImportingConstructor]
         public ShellViewModel(IWindowManager windowManager,IEmulatorViewModel viewModel)
         {
+            _log.Info("ShellViewModel Constructor");
             _windowManager = windowManager;
             _emulatorViewModel = viewModel;
             this.DisplayName = "Netduino Emulator";

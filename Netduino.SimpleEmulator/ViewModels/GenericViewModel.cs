@@ -12,11 +12,13 @@ namespace Netduino.SimpleEmulator.ViewModels
     [Export(typeof(IEmulatorViewModel))]
     public class GenericViewModel : Screen,IEmulatorViewModel, IHandle<OutputGpioEventArgs>
 	{
-		private readonly IEventAggregator _eventAggregator;
+        private readonly ILog _log = LogManager.GetLog(typeof(GenericViewModel));
+        private readonly IEventAggregator _eventAggregator;
 		[ImportingConstructor]
         public GenericViewModel(IEventAggregator eventAggregator)
 		{
-			_eventAggregator = eventAggregator;
+            _log.Info("GenericViewModel constructor");
+            _eventAggregator = eventAggregator;
 			_eventAggregator.Subscribe(this);
 		}
         private string _switch1ButtonText = "Turn Onboard LED On";
